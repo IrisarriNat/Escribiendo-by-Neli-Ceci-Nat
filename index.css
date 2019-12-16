@@ -1,28 +1,27 @@
 
- *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    body{
-        font-family: 'Raleway', sans-serif;
-        font-size: 3em;
-        height: 100vh;
-    }
-    .palabra{
-        width: 90vw;
-        height: 50%;
-        background-color: blueviolet;
-        margin: auto;
-        margin-top:auto;
-    }
-    h2{
-        text-align: center;
-    }
-    input{
-        width: 70%;
-        margin-left: 15%;
-        border-bottom: 1px solid black;
-        text-align: center;
-    }
-    
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Raleway', sans-serif;
+    font-size: 3em;
+    height: 100vh;
+}
+.palabra{
+    width: 90vw;
+    height: 50%;
+    background-color: blueviolet;
+    margin: auto;
+    margin-top:auto;
+}
+h2{
+    text-align: center;
+}
+input{
+    width: 70%;
+    margin-left: 15%;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
