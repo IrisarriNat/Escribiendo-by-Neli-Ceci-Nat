@@ -24,4 +24,9 @@ input{
     margin-left: 15%;
     border-bottom: 1px solid black;
     text-align: center;
+    height: 3em;
+}
+.puntos{
+    border: solid red 1px;
+    height: 40px;
 }

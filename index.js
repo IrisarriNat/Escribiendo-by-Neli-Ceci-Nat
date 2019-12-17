@@ -34,4 +34,6 @@ var jugador1 = new Jugador(0, 5);
 // mostrar vidas
 
 $(".palabra h2").html(palabra1.palabra);
+$(".puntos").html(jugador1.acumuladorPuntos);
+$(".vidas").html(jugador1.cantidadVidas);
 
