@@ -33,7 +33,15 @@ var jugador1 = new Jugador(0, 5);
 // mostrar puntos de jugador
 // mostrar vidas
 
+//$(".palabra h2").html(palabra1.palabra);
+
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+var numPalabra = getRandomInt(listadoPalabras.length);
+var palabra1 = new Palabra(false, listadoPalabras[numPalabra]);
+var jugador1 = new Jugador(0, 5);
 $(".palabra h2").html(palabra1.palabra);
 $(".puntos").html(jugador1.acumuladorPuntos);
 $(".vidas").html(jugador1.cantidadVidas);
-
