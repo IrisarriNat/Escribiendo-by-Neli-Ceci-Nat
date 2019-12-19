@@ -6,27 +6,64 @@
 }
 body{
     font-family: 'Raleway', sans-serif;
-    font-size: 3em;
+    font-size: 2.8em;
     height: 100vh;
+
 }
 .palabra{
-    width: 90vw;
-    height: 50%;
+    height: 75%;
     background-color: blueviolet;
-    margin: auto;
-    margin-top:auto;
+    min-height: 400px;
+}
+.palabra div{
+    height: 50%;
+    padding-top: 25vh;
+    padding-bottom: 25vh;
 }
 h2{
     text-align: center;
 }
+.puntos{
+    height: 40px;
+}
 input{
+    background: none;
+    border: 0;
     width: 70%;
     margin-left: 15%;
-    border-bottom: 1px solid black;
+    margin-bottom: 2.5em;
+    border-bottom: 2px solid rgba(240, 240, 240, 0.68);
     text-align: center;
     height: 3em;
 }
+button{
+    background: none;
+    border: 2px solid rgba(240, 240, 240, 0.68);
+    color: inherit;
+    font-size: .30em;
+    display: block;
+    margin: 2% auto;
+    padding: 1em;   
+    border-radius: 10px;
+    transition: all .5s ease;
+}
+button:hover{
+    background: rgb(240, 240, 240);
+    transition: all .5s ease;
+}
+.footer{
+    height: auto;
+    background: #EE7674;
+    text-align: center;
+    padding-top: 4%;
+    padding-bottom: 4%;
+}
+.footer div:first-child{
+    margin-bottom: 15px;
+}
+
+.vidas,
 .puntos{
-    border: solid red 1px;
-    height: 40px;
+    color: rgb(240, 240, 240);
+    display: block;
 }
