@@ -25,16 +25,50 @@ var listadoPalabras = [ "Compromiso", "Quince", "Profesion", "Colocar", "Boton",
 "Cepillar", "Reloj", "Pelicula", "Torpe", "Parasol", "Ayuda", "Saltar", "Honrado", "Africano", "Musulman", 
 "Cruz", "Urgencia",];
 
+var myTimer, palabra1, numPalabra, jugador1;
+
+function generarPalabra (){
+    numPalabra = getRandomInt(listadoPalabras.length);
+    palabra1 = new Palabra(true, listadoPalabras[numPalabra]);
+    jugador1 = new Jugador(0, 5);
+    $(".palabra h2").html(palabra1.palabra);
+    $(".puntos").html(jugador1.acumuladorPuntos);
+    $(".vidas").html(jugador1.cantidadVidas);
+}
+
+
+function startTimer(duration, display, resetInterval = false) {
+    var timer = duration, minutes, seconds;
+    if(resetInterval){
+        clearInterval(myTimer);
+        generarPalabra();
+    }
+    myTimer = setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent =  seconds;
+
+        if(seconds == 0) { 
+            seconds = 10; 
+            generarPalabra();
+        }
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+display = document.querySelector('#time');
+
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
-let numPalabra = getRandomInt(listadoPalabras.length);
-let palabra1 = new Palabra(false, listadoPalabras[numPalabra]);
-let jugador1 = new Jugador(0, 5);
-$(".palabra h2").html(palabra1.palabra);
-$(".puntos").html(jugador1.acumuladorPuntos);
-$(".vidas").html(jugador1.cantidadVidas);
 
 function procesarInput(){
     let input1 = $(".inputPalabra").val();
@@ -49,6 +83,10 @@ function conocerEstadoPalabra(Pal){
     return Pal.estado;
 }
 
+function desaparecerPalabra(){
+    $(".inputPalabra").val("");
+}
+
 function validar(){
     let user = procesarInput();
     let palabra = conocerPalabra(palabra1);
@@ -57,10 +95,23 @@ function validar(){
         alert("Perdiste!");
     } else if(estado && palabra==user){
         alert("Ganaste!");
+        startTimer(10, display, true);
+        desaparecerPalabra();
     } else if(estado && palabra !== user){
         alert("No pasa nada");
+        jugador1.perderVidas(1);
+        $(".vidas").html(jugador1.cantidadVidas);
     }
 }
+
+generarPalabra();
+
+
+window.onload = function () {
+    
+    startTimer(10, display);
+};
+
 
 
 // 1- variable que crea la palabra en estado false

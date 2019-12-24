@@ -3,6 +3,16 @@ class Jugador {
         this.acumuladorPuntos = puntos;
         this.cantidadVidas = vidas;
     }
-    perderVidas(){}
+
+    perderVidas(cantidad){
+        this.cantidadVidas -= cantidad;
+    };
+
+ 
     acumularPuntos(){}
+
 }
+
+
+  
+  
