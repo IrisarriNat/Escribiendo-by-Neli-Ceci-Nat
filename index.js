@@ -59,6 +59,7 @@ function startTimer(duration, display, resetInterval = false) {
 
         if (--timer < 0) {
             timer = duration;
+            desaparecerPalabra();
         }
     }, 1000);
 }
@@ -93,14 +94,16 @@ function validar(){
     let estado = conocerEstadoPalabra(palabra1);
     if(!estado){
         alert("Perdiste!");
+        desaparecerPalabra();
     } else if(estado && palabra==user){
         alert("Ganaste!");
         startTimer(10, display, true);
         desaparecerPalabra();
     } else if(estado && palabra !== user){
-        alert("No pasa nada");
+        alert("Perdiste!");
         jugador1.perderVidas(1);
         $(".vidas").html(jugador1.cantidadVidas);
+        desaparecerPalabra();
     }
 }
 
@@ -112,21 +115,3 @@ window.onload = function () {
     startTimer(10, display);
 };
 
-
-
-// 1- variable que crea la palabra en estado false
-// 2- variable que la muestra por pantalla y de estado true --> $.html 
-// 3- setTimeout --> que a esa variable, le aplique un .hide() y cambie el estado a false
-
-/* function crearPalabra(){
-    let palabra1 = new Palabra(false, listadoPalabras[numPalabra]);
-    return palabra1;
-}
-function mostrarEnPantalla(){
-    let asd = crearPalabra();
-    $(".palabra h2").html(asd.palabra);
-
-    setTimeout(function(){asd.hide()}, asd.tiempo) --
-} 
-mostrarEnPantalla();
-*/
