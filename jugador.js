@@ -8,11 +8,12 @@ class Jugador {
         this.cantidadVidas -= cantidad;
     };
 
- 
-    acumularPuntos(){}
-
+    acumularPuntos(palabra){
+        this.acumuladorPuntos += palabra.puntos;
+        mostrarPuntos(this.acumuladorPuntos);
+    }
 }
 
-
-  
-  
+function mostrarPuntos(numero){
+    $(".puntos").html(numero);
+}

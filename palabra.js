@@ -7,3 +7,5 @@ class Palabra{
     }
     estadoPalabra(){}
 }
+
+
