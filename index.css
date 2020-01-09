@@ -67,3 +67,14 @@ button:hover{
     color: rgb(240, 240, 240);
     display: block;
 }
+.timer{
+    background-color: antiquewhite;
+    border-radius: 100%;
+    padding: 25px;
+    position: absolute; 
+    top: 30px;
+    right: 50px;
+    margin: 25px;
+    width: 100px;
+    height: 100px;
+}

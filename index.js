@@ -23,6 +23,11 @@ var listadoColores = [
     '#802392',
 ];
 
+function cambiarColor(){
+    var nuevoColor = getRandomInt(listadoColores.length);
+    $(".palabra").css("background-color", listadoColores[nuevoColor]);
+}
+
 var listadoPalabras = [ "Compromiso", "Quince", "Profesion", "Colocar", "Boton", "Secuestrar", "Panteon",
 "Santo", "Festejo", "Migaja", "Balde", "Alta", "Cejas", "Conejo", "Zodiaco", "Puro", "Rugir", "Principio", 
 "Principe", "Armario", "Carambola", "Comer", "Rojo", "Sonido", "Funda", "Tempano", "Callado", "Corto", "Gusto",
@@ -46,41 +51,43 @@ function generarPalabra (){
     $(".palabra h2").html(palabra1.palabra);
     $(".puntos").html(jugador1.acumuladorPuntos);
     $(".vidas").html(jugador1.cantidadVidas);
+    cambiarColor();
 }
 
-function startTimer(duration, display, resetInterval = false) {
-    var timer = duration, minutes, seconds;
+var dificultad = 5;
+
+function startTimer(display, resetInterval = false) {
+    var timer = dificultad;
     if(resetInterval){
         clearInterval(myTimer);
         generarPalabra();
     }
     myTimer = setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
+        /* minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
 
         minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+        seconds = seconds < 10 ? "0" + seconds : seconds; */
 
-        display.textContent =  seconds;
+        display.textContent =  timer;
 
-        if(seconds == 0) { 
-            seconds = 10;
-        if(jugador1.cantidadVidas > 0){
-            jugador1.perderVidas(1);
-        } else {
+
+        if (--timer < 0) {
+            // seconds = dificultad;
+            if(jugador1.cantidadVidas > 0){
+                jugador1.perderVidas(1);
+            } else {
             
             // Falta arreglar funcionalidad de highscore!
 
-            highscore = jugador1.acumuladorPuntos;
-            jugador1.cantidadVidas = 5;
-            jugador1.acumuladorPuntos = 0;
-            mostrarPuntos(0);
-        }
-        generarPalabra();
-        }
+                highscore = jugador1.acumuladorPuntos;
+                jugador1.cantidadVidas = 5;
+                jugador1.acumuladorPuntos = 0;
+                mostrarPuntos(0);
+            }
+            generarPalabra();
 
-        if (--timer < 0) {
-            timer = duration;
+            timer = dificultad;
             desaparecerPalabra();
         }
     }, 1000);
@@ -128,8 +135,7 @@ function validar(){
 }
 generarPalabra();
 
-
 window.onload = function () {
-    startTimer(10, display);
+    startTimer(display);
 };
 
