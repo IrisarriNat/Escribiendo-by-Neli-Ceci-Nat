@@ -1,3 +1,15 @@
+var input = document.getElementById("inputPalabra");
+input.addEventListener("keyup", function (event) {
+    // Number 13 is the “Enter” key on the keyboard
+    if (event.keyCode === 13) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        document.getElementById("myBtn").click();
+        generarPalabra();
+    }
+});
+
 var listadoColores = [
     '#5BC0EB',
     '#FDE74C',
@@ -25,8 +37,8 @@ var listadoPalabras = [ "Compromiso", "Quince", "Profesion", "Colocar", "Boton",
 "Cepillar", "Reloj", "Pelicula", "Torpe", "Parasol", "Ayuda", "Saltar", "Honrado", "Africano", "Musulman", 
 "Cruz", "Urgencia",];
 
-var myTimer, palabra1, numPalabra, jugador1;
-jugador1 = new Jugador(0, 5);
+var myTimer, palabra1, numPalabra, jugador1, highscore;
+jugador1 = new Jugador(0, 1);
 
 function generarPalabra (){
     numPalabra = getRandomInt(listadoPalabras.length);
@@ -52,8 +64,19 @@ function startTimer(duration, display, resetInterval = false) {
         display.textContent =  seconds;
 
         if(seconds == 0) { 
-            seconds = 10; 
-            generarPalabra();
+            seconds = 10;
+        if(jugador1.cantidadVidas > 0){
+            jugador1.perderVidas(1);
+        } else {
+            
+            // Falta arreglar funcionalidad de highscore!
+
+            highscore = jugador1.acumuladorPuntos;
+            jugador1.cantidadVidas = 5;
+            jugador1.acumuladorPuntos = 0;
+            mostrarPuntos(0);
+        }
+        generarPalabra();
         }
 
         if (--timer < 0) {
@@ -85,6 +108,7 @@ function conocerEstadoPalabra(Pal){
 
 function desaparecerPalabra(){
     $(".inputPalabra").val("");
+    $(".inputPalabra").css({"color": "black", "font-style": "normal", "font-weight": "normal"});
 }
 function validar(){
     let user = procesarInput();
@@ -93,16 +117,15 @@ function validar(){
     if(!estado){
         desaparecerPalabra();
     } else if(estado && palabra==user){
-        jugador1.acumuladorPuntos(palabra1);
+        jugador1.acumularPuntos(palabra1);
         startTimer(10, display, true);
         desaparecerPalabra();
     } else if(estado && palabra !== user){
-        jugador1.perderVidas(1);
         $(".vidas").html(jugador1.cantidadVidas);
-        desaparecerPalabra();
+        $(".inputPalabra").css({"color": "red", "font-style": "italic", "font-weight": "bold"});
+        setTimeout(desaparecerPalabra, 300);
     }
 }
-
 generarPalabra();
 
 
