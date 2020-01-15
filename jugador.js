@@ -13,7 +13,3 @@ class Jugador {
         mostrarPuntos(this.acumuladorPuntos);
     }
 }
-
-function mostrarPuntos(numero){
-    $(".puntos").html(numero);
-}
