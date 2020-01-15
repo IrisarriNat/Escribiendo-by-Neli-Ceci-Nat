@@ -21,6 +21,16 @@ var listadoColores = [
     '#DE369D',
     '#4F6D7A',
     '#802392',
+    '#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
+    '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
+    '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
+    '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
+    '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
+    '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
+    '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
+    '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
+    '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
+    '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'
 ];
 
 function cambiarColor(){
@@ -40,14 +50,17 @@ var listadoPalabras = [ "Compromiso", "Quince", "Profesion", "Colocar", "Boton",
 "Perseguir", "Sacudida", "Nacer", "Escaparse", "Mitad", "Verdadero", "Carretilla", "Relampago", "Hueco", "Pulso", 
 "Recuerdos", "Punta", "Medianoche", "Bonito", "Hawaiano", "Deslumbrar", "Forro", "Adormecido", "Despedida", 
 "Cepillar", "Reloj", "Pelicula", "Torpe", "Parasol", "Ayuda", "Saltar", "Honrado", "Africano", "Musulman", 
-"Cruz", "Urgencia",];
+"Cruz", "Urgencia","estaba","mejor","están","va","hombre","usted","mucho","hace","entonces","siento","tenemos","puedes","alguien","hasta","sin","mí","solo","años","sobre","decir","uno","siempre","oh","ir","cosas","también","antes","has","ni","mis","día","estar","estamos","noche","nadie","otra","quiere","parece","nosotros","poco","padre","trabajo","gente","mira","vas","sea","les","donde","mismo","hecho","ellos","dijo","pasa","dinero","hijo","tal","otro","hablar","seguro","claro","estas","lugar","mundo","amigo","espera","mierda","han","tus","sabe","después","momento","desde","fuera","cosa","tipo","mañana","podemos","dije","gran","necesito","estado","podría","acuerdo","papá","tener","dice","mío","crees","buena","gusta","nuestro","nuevo","será","haciendo","días","nombre","buen","había","ven","tres","menos","debe","tenía","mal","conmigo","madre","hoy","quien","sido","mamá","tienen","luego","todas","allí","toda","hora","mujer","visto","haces","importa","contigo","ve","tarde","oye","parte","haber","hombres","problema","mas","saber","quería","aún","veces","nuestra","hacerlo","cada","hizo","veo","tanto","razón","ustedes","idea","esos","van","quizá","debo","alguna","cierto","ud","muerto","unos","estos","salir","policía","realmente","demasiado","familia","pueden","cabeza","hemos","amigos","chica","cariño","lado","allá","entre","minutos","digo","algún","serio","cuidado","pasó","buenas","somos","amor","puerta","ves","vaya","ah","suerte","eh","rápido","cuenta","quizás","io","esas","pues","pasado","pensé","todavía","hermano","debes","casi","forma","aqui","chico","ok","dicho","nueva","sabía","muchas","dentro","hice","contra","auto","camino",];
+// Filtrar listado, para que solo pasen palabras de más de 3 letras.
+// Quizá un nivel de complejidad mayor se pueda ir ampliando ese filtro
 
 var myTimer, palabra1, numPalabra, jugador1, highscore;
 jugador1 = new Jugador(0, 1);
 
 function generarPalabra (){
     numPalabra = getRandomInt(listadoPalabras.length);
-    palabra1 = new Palabra(true, listadoPalabras[numPalabra]);
+    upper =  listadoPalabras[numPalabra].toUpperCase()
+    palabra1 = new Palabra(true, upper);
     $(".palabra h2").html(palabra1.palabra);
     $(".puntos").html(jugador1.acumuladorPuntos);
     $(".vidas").html(jugador1.cantidadVidas);
@@ -74,7 +87,7 @@ function startTimer(display, resetInterval = false) {
 
         if (--timer < 0) {
             // seconds = dificultad;
-            if(jugador1.cantidadVidas > 0){
+            if(jugador1.cantidadVidas > 1){
                 jugador1.perderVidas(1);
             } else {
             
@@ -102,7 +115,7 @@ function getRandomInt(max) {
 
 function procesarInput(){
     let input1 = $(".inputPalabra").val();
-    return input1;
+    return input1.toUpperCase();
 }
 
 function conocerPalabra(Pal){
