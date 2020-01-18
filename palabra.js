@@ -4,6 +4,7 @@ class Palabra{
         this.palabra = palabra;
         this.puntos = this.palabra.length;
         this.tiempo = this.puntos*2;
+        
     }
     estadoPalabra(){}
 }

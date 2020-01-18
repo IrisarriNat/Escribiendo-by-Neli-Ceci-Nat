@@ -8,7 +8,12 @@ var vista = new Vista(controlador, {
     'puntos': $(".puntos"),
     'vidas': $(".vidas"),
     'claseInput': $(".inputPalabra"),
-});
+})
+var modelo = new Modelo(jugador);
+
+
+
+
 
 controlador.generarPalabra();// que está en VISTA
 
