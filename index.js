@@ -14,11 +14,12 @@ var modelo = new Modelo(jugador);
 
 
 
-
-controlador.generarPalabra();// que está en VISTA
+// que está en VISTA
 
 // Inicializa el juego (después será por botón) pertenece a INDEX
 window.onload = function () {
-    startTimer(display);
+    controlador.startTimer();
+    controlador.generarPalabra();
+    vista.presionarEnter();
 };
 

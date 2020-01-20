@@ -29,14 +29,16 @@ Controlador.prototype = {
     generarPalabra: function(numPalabra,upper,jugador){
         
 
-        numPalabra = this.getRandomInt();  // llama o busca en MODELO
+        numPalabra = this.getRandomInt(modelo.listadoPalabras);  // llama o busca en MODELO
         upper = numPalabra.toUpperCase();
         var palabra = new Palabra(true, upper);
-       // this.modelo.html(numPalabra);
-        vista.elementos.palabra.html(numPalabra);
+
+       
+        vista.elementos.palabra.html(upper);
         vista.elementos.puntos.html(this.jugador.acumuladorPuntos);
-        vista.elementos.vidas.html(this.jugador.cantidadVidas);
-        cambiarColor();
+        vista.elementos.vidas.html(this.jugador.cantidadVidas)
+        
+        vista.cambiarColor();
     },
     startTimer: function (display, resetInterval = false) {
         var timer = this.dificultad;
@@ -44,7 +46,7 @@ Controlador.prototype = {
         var display = document.querySelector('#time');
         if(resetInterval){
             clearInterval(contexto.myTimer);
-            generarPalabra(); // que llama a VISTA
+            contexto.generarPalabra(); // que llama a VISTA
         }
         contexto.myTimer = setInterval(function () {
             display.textContent =  timer;
@@ -59,18 +61,18 @@ Controlador.prototype = {
                     contexto.highscore = contexto.jugador.acumuladorPuntos;
                     contexto.jugador.cantidadVidas = 5;
                     contexto.jugador.acumuladorPuntos = 0;
-                    mostrarPuntos(0); // que está en VISTA
+                    vista.mostrarPuntos(0); // que está en VISTA
                 }
-                generarPalabra();
+                contexto.generarPalabra();
 
                 timer = contexto.dificultad;
-                desaparecerPalabra(); // que está en VISTA
+                vista.desaparecerPalabra(); // que está en VISTA
             }
         }, 1000);
     },
 
-    getRandomInt: function () {
-        return modelo.listadoPalabras[Math.floor(modelo.listadoPalabras.length * Math.random())];
+    getRandomInt: function (max) {
+        return max[Math.floor(max.length * Math.random())];
     },
     // aleatorio = Math.floor(Math.random() * (listado.length));
     // seleccion = listado[aleatorio]
