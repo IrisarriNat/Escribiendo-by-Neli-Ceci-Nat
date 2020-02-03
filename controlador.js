@@ -99,7 +99,7 @@ Controlador.prototype = {
             // tendría que ser reemplazado por una función que se aloje en VISTA y se llame acá (en MODELO)
             $(".vidas").html(jugador.cantidadVidas);
             $(".inputPalabra").css({"color": "red", "font-style": "italic", "font-weight": "bold"});
-            setTimeout(() => {vista.desaparecerPalabra()}, 300);
+            setTimeout(() => {vista.desaparecerPalabra()}, 50);
         }
     },
 }
