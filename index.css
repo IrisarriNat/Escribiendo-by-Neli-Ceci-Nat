@@ -13,14 +13,10 @@ body{
 
 }
 .palabra{
-    height: 75%;
-    background-color: blueviolet;
-    min-height: 400px;
+    height: 100vh;
+    padding: 4.2% 0;
 }
 .palabra div{
-    height: 50%;
-    padding-top: 25vh;
-    padding-bottom: 25vh;
 }
 h2{
     text-align: center;
@@ -54,30 +50,31 @@ button:hover{
     background: rgb(240, 240, 240);
     transition: all .5s ease;
 }
-.footer{
-    height: auto;
-    background: #EE7674;
-    text-align: center;
-    padding-top: 4%;
-    padding-bottom: 4%;
-}
+.footer{position: fixed;bottom: 0;left: 0;width: 100vw;text-align: center;background: #af56a4;height: 50vh;display: flex;flex-direction: column;justify-content: center;}
 .footer div:first-child{
-    margin-bottom: 15px;
 }
-
+.footer div{
+    padding: 9px;
+}
 .vidas,
 .puntos{
     color: rgb(240, 240, 240);
     display: block;
+    width: auto;
+    text-align: center;
+    margin: auto;
 }
 .timer{
     background-color: antiquewhite;
     border-radius: 100%;
     padding: 25px;
-    position: absolute; 
+    position: absolute;
     top: 30px;
     right: 50px;
     margin: 25px;
     width: 100px;
     height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
