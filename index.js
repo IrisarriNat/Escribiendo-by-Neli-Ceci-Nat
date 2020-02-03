@@ -13,7 +13,6 @@ var modelo = new Modelo(jugador);
 
 
 
-
 // que está en VISTA
 
 // Inicializa el juego (después será por botón) pertenece a INDEX

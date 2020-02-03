@@ -31,7 +31,7 @@ Controlador.prototype = {
 
         numPalabra = this.getRandomInt(modelo.listadoPalabras);  // llama o busca en MODELO
         upper = numPalabra.toUpperCase();
-        var palabra = new Palabra(true, upper);
+        this.palabra = new Palabra(true, upper);
 
        
         vista.elementos.palabra.html(upper);
@@ -40,7 +40,7 @@ Controlador.prototype = {
         
         vista.cambiarColor();
     },
-    startTimer: function (display, resetInterval = false) {
+    startTimer: function (resetInterval = false) {
         var timer = this.dificultad;
         var contexto = this;
         var display = document.querySelector('#time');
@@ -85,20 +85,21 @@ Controlador.prototype = {
     },
 
     validar: function(){
-        let user = procesarInput();
-        let palabra = conocerPalabra(palabra1);
-        let estado = conocerEstadoPalabra(palabra1);
+        let user = vista.procesarInput();
+        let palabra = this.conocerPalabra(this.palabra);
+        let estado = this.conocerEstadoPalabra(this.palabra);
         if(!estado){
-            desaparecerPalabra(); // que está en VISTA
+            vista.desaparecerPalabra(); // que está en VISTA
         } else if(estado && palabra==user){
-            jugador.acumularPuntos(palabra1); // guarda en MODELO y se muestra en VISTA 
-            startTimer(10, display, true);
-            desaparecerPalabra(); // que está en VISTA
+            jugador.acumularPuntos(this.palabra);
+            vista.mostrarPuntos(jugador.acumuladorPuntos); // guarda en MODELO y se muestra en VISTA 
+            this.startTimer(true);
+            vista.desaparecerPalabra(); // que está en VISTA
         } else if(estado && palabra !== user){
             // tendría que ser reemplazado por una función que se aloje en VISTA y se llame acá (en MODELO)
             $(".vidas").html(jugador.cantidadVidas);
             $(".inputPalabra").css({"color": "red", "font-style": "italic", "font-weight": "bold"});
-            setTimeout(desaparecerPalabra, 300);
+            setTimeout(() => {vista.desaparecerPalabra()}, 300);
         }
     },
 }

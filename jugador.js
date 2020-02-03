@@ -10,6 +10,5 @@ class Jugador {
 
     acumularPuntos(palabra){
         this.acumuladorPuntos += palabra.puntos;
-        mostrarPuntos(this.acumuladorPuntos);
     }
 }

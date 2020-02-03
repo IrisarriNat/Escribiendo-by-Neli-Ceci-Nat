@@ -1,23 +1,23 @@
 var Vista = function(controlador, elementos){
     this.controlador = controlador;
     this.elementos = elementos;
-    var contexto = this;
 };
 
-    Vista.prototype = {
+Vista.prototype = {
     presionarEnter : function () {
-            this.elementos.input.on("keyup", function (event) {
-            // Number 13 is the “Enter” key on the keyboard
-            if (event.keyCode === 13) {
-                // Cancel the default action, if needed
-                event.preventDefault();
-                // Trigger the button element with a click
-                vista.elementos.boton.click();
-                contexto.controlador.generarPalabra();
-            }
-        })
+        
+        var contexto = this;
+        this.elementos.input.on("keyup", function (event) {
+        // Number 13 is the “Enter” key on the keyboard
+        if (event.keyCode === 13) {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            vista.elementos.boton.click();
+/*             contexto.controlador.generarPalabra(); */
+        }})
     },
-    
+
 
     cambiarColor:  function () {
 
@@ -35,7 +35,7 @@ var Vista = function(controlador, elementos){
     },
 
     procesarInput: function (){
-        let input1 = this.controlador.claseInput.val();
+        let input1 = this.elementos.claseInput.val();
         return input1.toUpperCase();
     }
 
