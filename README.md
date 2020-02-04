@@ -1,2 +1,1 @@
-# Escribiendo-by-Neli-Ceci-Nat
-Repositorio de Escribiendo 
+The original repository has been developed by me (Cecilia Mermoz), Natalia Irriazi and Nelida Marcos. I had forked to improved more changes to the videogame that it contains. It's already working but it's improves are still a work in progress. 
