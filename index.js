@@ -1,4 +1,4 @@
-var jugador = new Jugador(0, 1);
+var jugador = new Jugador(0, 5);
 var controlador = new Controlador(jugador);
 var vista = new Vista(controlador, {
     'input': $("#inputPalabra"),

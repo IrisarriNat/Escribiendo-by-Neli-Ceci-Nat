@@ -14,31 +14,44 @@ var Controlador = function(jugador){
         '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'
     ];
 
-    
     this.myTimer = 0;
     this.jugador = jugador;
     this.highscore = 0;
     this.dificultad = 5;
+    this.modal = document.getElementById("modal");
     
 };
 
 Controlador.prototype = {
+    modalReglas: function(){
+        var contexto = this;
+        var modal = this.modal;
+        modal.style.display = "block";
+        var span = document.getElementsByClassName("close")[0];
+        span.onclick = function() {
+            modal.style.display = "none";
+            contexto.generarPalabra(); 
 
-    /*DIVIDIR funcion para que la mitad este en el controlador y la mitad en la vista*/
-    
+            }
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                    contexto.generarPalabra(); 
+
+            }
+        }
+    },
+
     generarPalabra: function(numPalabra,upper,jugador){
-        
 
-        numPalabra = this.getRandomInt(modelo.listadoPalabras);  // llama o busca en MODELO
+        numPalabra = this.getRandomInt(modelo.listadoPalabras); 
         upper = numPalabra.toUpperCase();
-        this.palabra = new Palabra(true, upper);
-
-       
+        this.palabra = new Palabra(true, upper);    
         vista.elementos.palabra.html(upper);
         vista.elementos.puntos.html(this.jugador.acumuladorPuntos);
         vista.elementos.vidas.html(this.jugador.cantidadVidas)
-        
         vista.cambiarColor();
+        
     },
     startTimer: function (resetInterval = false) {
         var timer = this.dificultad;
@@ -46,27 +59,29 @@ Controlador.prototype = {
         var display = document.querySelector('#time');
         if(resetInterval){
             clearInterval(contexto.myTimer);
-            contexto.generarPalabra(); // que llama a VISTA
+            contexto.generarPalabra(); 
+
         }
         contexto.myTimer = setInterval(function () {
-            display.textContent =  timer;
-            if (--timer < 0) {
-                // seconds = dificultad;
-                if(contexto.jugador.cantidadVidas > 1){
-                    contexto.jugador.perderVidas(1);
-                } else {
-                
-                // Falta arreglar funcionalidad de highscore!
+            if(this.modal.style.display == "none"){
+                display.textContent = timer;
+                if (--timer < 0) {
+                    // seconds = dificultad;
+                    if(contexto.jugador.cantidadVidas > 1){
+                        contexto.jugador.perderVidas(1);
+                    } else {
+                    
+                    // Falta arreglar funcionalidad de highscore!
+                        contexto.highscore = contexto.jugador.acumuladorPuntos;
+                        contexto.jugador.cantidadVidas = 5;
+                        contexto.jugador.acumuladorPuntos = 0;
+                        vista.mostrarPuntos(0); 
+                    }
+                    contexto.generarPalabra();
 
-                    contexto.highscore = contexto.jugador.acumuladorPuntos;
-                    contexto.jugador.cantidadVidas = 5;
-                    contexto.jugador.acumuladorPuntos = 0;
-                    vista.mostrarPuntos(0); // que está en VISTA
+                    timer = contexto.dificultad;
+                    vista.desaparecerPalabra(); 
                 }
-                contexto.generarPalabra();
-
-                timer = contexto.dificultad;
-                vista.desaparecerPalabra(); // que está en VISTA
             }
         }, 1000);
     },
@@ -89,14 +104,13 @@ Controlador.prototype = {
         let palabra = this.conocerPalabra(this.palabra);
         let estado = this.conocerEstadoPalabra(this.palabra);
         if(!estado){
-            vista.desaparecerPalabra(); // que está en VISTA
+            vista.desaparecerPalabra(); 
         } else if(estado && palabra==user){
             jugador.acumularPuntos(this.palabra);
-            vista.mostrarPuntos(jugador.acumuladorPuntos); // guarda en MODELO y se muestra en VISTA 
+            vista.mostrarPuntos(jugador.acumuladorPuntos); 
             this.startTimer(true);
-            vista.desaparecerPalabra(); // que está en VISTA
+            vista.desaparecerPalabra(); 
         } else if(estado && palabra !== user){
-            // tendría que ser reemplazado por una función que se aloje en VISTA y se llame acá (en MODELO)
             $(".vidas").html(jugador.cantidadVidas);
             $(".inputPalabra").css({"color": "red", "font-style": "italic", "font-weight": "bold"});
             setTimeout(() => {vista.desaparecerPalabra()}, 50);
