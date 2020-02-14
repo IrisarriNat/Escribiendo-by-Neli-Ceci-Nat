@@ -57,7 +57,8 @@ button:hover{
     padding: 9px;
 }
 .vidas,
-.puntos{
+.puntos,
+.hs{
     color: rgb(240, 240, 240);
     display: block;
     width: auto;

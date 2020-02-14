@@ -1,4 +1,4 @@
-var jugador = new Jugador(0, 5);
+var jugador = new Jugador(0, 1, 0);
 var controlador = new Controlador(jugador);
 var vista = new Vista(controlador, {
     'input': $("#inputPalabra"),
@@ -8,17 +8,14 @@ var vista = new Vista(controlador, {
     'puntos': $(".puntos"),
     'vidas': $(".vidas"),
     'claseInput': $(".inputPalabra"),
+    'hs': $(".hs"),
 })
 var modelo = new Modelo(jugador);
 
-
-
-// que está en VISTA
-
 // Inicializa el juego (después será por botón) pertenece a INDEX
 window.onload = function () {
+    controlador.modalReglas();
     controlador.startTimer();
-    controlador.generarPalabra();
     vista.presionarEnter();
 };
 

@@ -6,3 +6,6 @@ Things to work on:
 - Responsive
 - HighScore (at least in LocalStorage)
 - Modelo -> listadoPalabras -> generate a filter that only allows larger-than-3-character words, to be selected from the array. This filter maybe be useful on a harder-level situation.
+
+- bug tarda el countdown en refrescar cuando compete
+- bug de highscore (después de entrar dos veces en el ELSE, resetea el highscore a 0.. es decir cuando se queda dos veces sin vida)

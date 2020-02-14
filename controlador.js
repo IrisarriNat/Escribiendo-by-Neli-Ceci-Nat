@@ -16,10 +16,13 @@ var Controlador = function(jugador){
 
     this.myTimer = 0;
     this.jugador = jugador;
-    this.highscore = 0;
-    this.dificultad = 5;
+    this.hs = jugador.hs;
     this.modal = document.getElementById("modal");
-    
+    // to reduce countdown, reduce "dificultad"
+    this.dificultad = 5;
+    // to reduce amount of lifes, reduce "lifes"
+    this.lifes = 1;
+
 };
 
 Controlador.prototype = {
@@ -49,7 +52,7 @@ Controlador.prototype = {
         this.palabra = new Palabra(true, upper);    
         vista.elementos.palabra.html(upper);
         vista.elementos.puntos.html(this.jugador.acumuladorPuntos);
-        vista.elementos.vidas.html(this.jugador.cantidadVidas)
+        vista.elementos.vidas.html(this.jugador.cantidadVidas);
         vista.cambiarColor();
         
     },
@@ -60,25 +63,32 @@ Controlador.prototype = {
         if(resetInterval){
             clearInterval(contexto.myTimer);
             contexto.generarPalabra(); 
-
         }
         contexto.myTimer = setInterval(function () {
             if(this.modal.style.display == "none"){
                 display.textContent = timer;
-                if (--timer < 0) {
+                if (--timer < 0) {  
                     // seconds = dificultad;
-                    if(contexto.jugador.cantidadVidas > 1){
+                    if(contexto.jugador.cantidadVidas >= 1){
                         contexto.jugador.perderVidas(1);
+                        vista.mostrarHS(contexto.hs);
                     } else {
-                    
-                    // Falta arreglar funcionalidad de highscore!
-                        contexto.highscore = contexto.jugador.acumuladorPuntos;
-                        contexto.jugador.cantidadVidas = 5;
+                        var hsAnterior = contexto.hs;
+                        contexto.hs = contexto.jugador.acumuladorPuntos;
                         contexto.jugador.acumuladorPuntos = 0;
-                        vista.mostrarPuntos(0); 
+                        contexto.jugador.cantidadVidas = contexto.lifes;
+                        if(hsAnterior < contexto.hs){
+                            console.log("el contexto.hs es: " + contexto.hs);
+                            console.log("el hsAnterior es: " + hsAnterior);
+                            hsAnterior = contexto.hs;
+                            console.log("Y ahora hsAnterior quedó como: " + hsAnterior);
+                            vista.mostrarHS(contexto.hs);
+                        }else{
+                            console.log("entro en ELSE y hsAnterior es: " + hsAnterior);
+                            vista.mostrarHS(hsAnterior);
+                        }
                     }
                     contexto.generarPalabra();
-
                     timer = contexto.dificultad;
                     vista.desaparecerPalabra(); 
                 }
@@ -107,7 +117,8 @@ Controlador.prototype = {
             vista.desaparecerPalabra(); 
         } else if(estado && palabra==user){
             jugador.acumularPuntos(this.palabra);
-            vista.mostrarPuntos(jugador.acumuladorPuntos); 
+            vista.mostrarPuntos(jugador.acumuladorPuntos); /* 
+            vista.mostrarHS(jugador.hs(jugador.puntos)); */
             this.startTimer(true);
             vista.desaparecerPalabra(); 
         } else if(estado && palabra !== user){

@@ -1,7 +1,6 @@
 var Vista = function(controlador, elementos){
     this.controlador = controlador;
     this.elementos = elementos;
-    controlador.modalReglas();
 };
 
 Vista.prototype = {
@@ -26,6 +25,10 @@ Vista.prototype = {
         this.elementos.puntos.html(numero);
     },
 
+    mostrarHS: function(numero){
+        this.elementos.hs.html(numero);
+    },
+
     desaparecerPalabra: function (){
         this.elementos.claseInput.val("");
         this.elementos.claseInput.css({"color": "black", "font-style": "normal", "font-weight": "normal"});
@@ -35,5 +38,6 @@ Vista.prototype = {
         let input1 = this.elementos.claseInput.val();
         return input1.toUpperCase();
     }
+
 
 };
