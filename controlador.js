@@ -56,6 +56,32 @@ Controlador.prototype = {
         vista.cambiarColor();
         
     },
+    startTimer2: () => {
+        var timer = controlador.dificultad;
+        var bool = true;
+        var vuelta = 0;
+        var reloj = document.querySelector('#time');
+        reloj.textContent = timer;
+
+        document.getElementById("modal").addEventListener("click", 
+            function countdown() {
+                if(timer==0){
+                    timer = this.dificultad;
+                    bool = false;
+                }else{
+                    timer-=1;
+                    bool = true;
+                    setTimeout(()=> {countdown()},1000);
+                }
+                return bool;
+            }            
+        )
+
+        
+    },
+/* 
+
+
     startTimer: function (resetInterval = false) {
         var timer = this.dificultad;
         var contexto = this;
@@ -94,7 +120,7 @@ Controlador.prototype = {
                 }
             }
         }, 1000);
-    },
+    }, */
 
     getRandomInt: function (max) {
         return max[Math.floor(max.length * Math.random())];
