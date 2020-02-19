@@ -61,10 +61,9 @@ Controlador.prototype = {
         var bool = true;
         var vuelta = 0;
         var reloj = document.querySelector('#time');
-        reloj.textContent = timer;
-
         document.getElementById("modal").addEventListener("click", 
             function countdown() {
+                reloj.textContent = timer;
                 if(timer==0){
                     timer = this.dificultad;
                     bool = false;
@@ -75,6 +74,7 @@ Controlador.prototype = {
                 }
                 return bool;
             }            
+            
         )
 
         
