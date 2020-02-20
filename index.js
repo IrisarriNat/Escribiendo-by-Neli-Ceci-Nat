@@ -15,7 +15,6 @@ var modelo = new Modelo(jugador);
 // Inicializa el juego (después será por botón) pertenece a INDEX
 window.onload = function () {
     controlador.modalReglas();
-    controlador.startTimer();
-    vista.presionarEnter();
+    controlador.logica();
 };
 

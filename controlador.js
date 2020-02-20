@@ -56,29 +56,30 @@ Controlador.prototype = {
         vista.cambiarColor();
         
     },
-    startTimer2: () => {
+    startTimer: () => {
         var timer = controlador.dificultad;
-        var bool = true;
-        var vuelta = 0;
         var reloj = document.querySelector('#time');
         document.getElementById("modal").addEventListener("click", 
             function countdown() {
                 reloj.textContent = timer;
                 if(timer==0){
                     timer = this.dificultad;
-                    bool = false;
                 }else{
                     timer-=1;
-                    bool = true;
                     setTimeout(()=> {countdown()},1000);
                 }
-                return bool;
+                return timer;
             }            
-            
         )
-
-        
     },
+    logica: () => {
+        // esto lo preparo para acá meter el setInterval, para que empiece el contador sin esperar una vez, y luego arranque el setInterval a resetear una y otra vez el contador
+        var interval = controlador.dificultad*1000;
+        controlador.startTimer();
+        vista.presionarEnter();
+    },
+    
+
 /* 
 
 
