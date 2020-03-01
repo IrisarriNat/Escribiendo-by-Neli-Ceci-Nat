@@ -1,4 +1,4 @@
-var jugador = new Jugador(0, 1, 0);
+var jugador = new Jugador(3, 0);
 var controlador = new Controlador(jugador);
 var vista = new Vista(controlador, {
     'input': $("#inputPalabra"),
@@ -15,6 +15,7 @@ var modelo = new Modelo(jugador);
 // Inicializa el juego (después será por botón) pertenece a INDEX
 window.onload = function () {
     controlador.modalReglas();
-    controlador.logica();
+    controlador.startTimer();
+    vista.presionarEnter();
 };
 

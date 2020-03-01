@@ -20,8 +20,6 @@ var Controlador = function(jugador){
     this.modal = document.getElementById("modal");
     // to reduce countdown, reduce "dificultad"
     this.dificultad = 5;
-    // to reduce amount of lifes, reduce "lifes"
-    this.lifes = 1;
 
 };
 
@@ -40,6 +38,8 @@ Controlador.prototype = {
                 if (event.target == modal) {
                     modal.style.display = "none";
                     contexto.generarPalabra(); 
+            vista.mostrarHS(contexto.jugador.hs);
+
 
             }
         }
@@ -56,33 +56,6 @@ Controlador.prototype = {
         vista.cambiarColor();
         
     },
-    startTimer: () => {
-        var timer = controlador.dificultad;
-        var reloj = document.querySelector('#time');
-        document.getElementById("modal").addEventListener("click", 
-            function countdown() {
-                reloj.textContent = timer;
-                if(timer==0){
-                    timer = this.dificultad;
-                }else{
-                    timer-=1;
-                    setTimeout(()=> {countdown()},1000);
-                }
-                return timer;
-            }            
-        )
-    },
-    logica: () => {
-        // esto lo preparo para acá meter el setInterval, para que empiece el contador sin esperar una vez, y luego arranque el setInterval a resetear una y otra vez el contador
-        var interval = controlador.dificultad*1000;
-        controlador.startTimer();
-        vista.presionarEnter();
-    },
-    
-
-/* 
-
-
     startTimer: function (resetInterval = false) {
         var timer = this.dificultad;
         var contexto = this;
@@ -92,36 +65,21 @@ Controlador.prototype = {
             contexto.generarPalabra(); 
         }
         contexto.myTimer = setInterval(function () {
-            if(this.modal.style.display == "none"){
+            // to start only after the modal it's closed
+            if( controlador.modal.style.display == "none"){
+                vista.mostrarHS(contexto.jugador.hs);   
                 display.textContent = timer;
-                if (--timer < 0) {  
-                    // seconds = dificultad;
-                    if(contexto.jugador.cantidadVidas >= 1){
-                        contexto.jugador.perderVidas(1);
-                        vista.mostrarHS(contexto.hs);
-                    } else {
-                        var hsAnterior = contexto.hs;
-                        contexto.hs = contexto.jugador.acumuladorPuntos;
-                        contexto.jugador.acumuladorPuntos = 0;
-                        contexto.jugador.cantidadVidas = contexto.lifes;
-                        if(hsAnterior < contexto.hs){
-                            console.log("el contexto.hs es: " + contexto.hs);
-                            console.log("el hsAnterior es: " + hsAnterior);
-                            hsAnterior = contexto.hs;
-                            console.log("Y ahora hsAnterior quedó como: " + hsAnterior);
-                            vista.mostrarHS(contexto.hs);
-                        }else{
-                            console.log("entro en ELSE y hsAnterior es: " + hsAnterior);
-                            vista.mostrarHS(hsAnterior);
-                        }
-                    }
-                    contexto.generarPalabra();
+                timer--;
+                // if there's still time, enters the if
+                if (timer < 0) { 
+                    contexto.jugador.perderVidas(1);
                     timer = contexto.dificultad;
-                    vista.desaparecerPalabra(); 
+                    contexto.generarPalabra();
+                    vista.desaparecerPalabra();
                 }
             }
         }, 1000);
-    }, */
+    },
 
     getRandomInt: function (max) {
         return max[Math.floor(max.length * Math.random())];

@@ -11,12 +11,4 @@ Things to work on:
 - bug de highscore (después de entrar dos veces en el ELSE, resetea el highscore a 0.. es decir cuando se queda dos veces sin vida)
 
 
-var totalTime = 10;
-function updateClock() {
-document.getElementById('countdown').innerHTML = totalTime;
-if(totalTime==0){
-alert('Final');
-}else{
-totalTime-=1;
-setTimeout("updateClock()",1000);
-}
+// document.body.addEventListener("click", () => setInterval(()=> {console.log(1)}, 1000 ))
