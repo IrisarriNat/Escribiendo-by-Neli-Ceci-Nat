@@ -4,20 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Escribiendo by Neli, Ceci & Naty</title>
+    <title>Escribiendo</title>
     <link href="https://fonts.googleapis.com/css?family=Poiret+One|Roboto:300,500&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
     <link rel="stylesheet" href="index.css">
 
 </head>
 <body>
+
+    <!-- The Modal -->
+    <div id="modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 style="margin-bottom: 15px;">Reglas del juego</h2>
+            <p style="margin-bottom: 15px;">Cuando cierres esta pestaña, el cronómetro empezará a correr.</p>
+            <p style="margin-bottom: 15px;">Tenés 5 segundos para tipear la palabra que ves en pantalla, pero ¡cuidado! no te olvides las tildes (la ortografía importa).
+                Cada palabra que escribas bien te hará sumar puntos, si te equivocas no importa, en tanto escribas bien nuevamente la palabra
+                antes de que acaben tus 5 segundos. Pasados estos, se te quitará una vida. Tenes 5 vidas para acumular el mayor puntaje que puedas.
+            </p>
+            <p style="margin-bottom: 15px;">¡Buena suerte!</p>
+        </div>
+  
+    </div>
+
     <div id="time" class="timer"></div>
     <div class="palabra">
         <div class="">
             <h2></h2>
             <input class="inputPalabra" id="inputPalabra" type="text"></input>
 <!--             <button type="submit" id="iniciar" onclick="empezarJuego()">Empezar a Jugar</button> -->
-            <button type="submit" id="myBtn" onclick="controlador.validar()">Probar Suerte</button>
+            <button type="submit" id="myBtn" onclick="controlador.validar()">Enter</button>
         </div>
     </div>
     <div class="footer">
@@ -28,6 +46,10 @@
         <div>
             <span>Cantidad de vidas:</span>
             <span class="vidas"></span>
+        </div>
+        <div>
+            <span>HighScore:</span>
+            <span class="hs"></span>
         </div>
     </div>
     <script src="jugador.js"></script>

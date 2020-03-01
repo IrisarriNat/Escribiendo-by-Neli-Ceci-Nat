@@ -5,7 +5,6 @@ var Vista = function(controlador, elementos){
 
 Vista.prototype = {
     presionarEnter : function () {
-        
         var contexto = this;
         this.elementos.input.on("keyup", function (event) {
         // Number 13 is the “Enter” key on the keyboard
@@ -14,19 +13,20 @@ Vista.prototype = {
             event.preventDefault();
             // Trigger the button element with a click
             vista.elementos.boton.click();
-/*             contexto.controlador.generarPalabra(); */
         }})
     },
 
-
     cambiarColor:  function () {
-
-            var nuevoColor = this.controlador.getRandomInt(this.controlador.listadoColores);
-            this.elementos.fondoPalabra.css("background-color", nuevoColor);
+        var nuevoColor = this.controlador.getRandomInt(this.controlador.listadoColores);
+        this.elementos.fondoPalabra.css("background-color", nuevoColor);
     },
 
     mostrarPuntos: function (numero){
         this.elementos.puntos.html(numero);
+    },
+
+    mostrarHS: function(numero){
+        this.elementos.hs.html(numero);
     },
 
     desaparecerPalabra: function (){
@@ -39,5 +39,5 @@ Vista.prototype = {
         return input1.toUpperCase();
     }
 
-};
 
+};
